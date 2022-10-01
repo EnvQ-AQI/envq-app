@@ -1,4 +1,4 @@
-# bases_flutter
+# envq-app
 
 A new Flutter project.
 
