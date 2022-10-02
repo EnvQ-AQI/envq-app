@@ -17,26 +17,26 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Git
 
-We will keep two main branches the main branch which is the stable version of the product and the development branch.
+Mantendremos dos ramas principales la rama principal que es la versión estable del producto y la rama de desarrollo.
 
-For changes we will create a new branch with the following convention `f-shortDescription-developer`, for example this branch would be `f-splashScreen-are` for `Antonio Reyna Espinoza`. We create new branches and push changes like this: 
+Para hacer cambios crearemos una nueva rama con la siguiente convención `f-shortDescription-developer`, por ejemplo esta rama sería `f-splashScreen-are` para `Antonio Reyna Espinoza`. Creamos nuevas ramas y hacemos push de la siguiente manera: 
 
 `~$ git checkout -b f-splashScreen-are` \
 `~$ git add .` \
 `~$ git commit -m "Add splash screen" .` \
 `~$ git push origin head`
 
-Whenever we make small changes, instead of creating new branches we will update the current branch instead using the flag `-ammend` like so:
+Cada vez que hacemos pequeños cambios, en lugar de crear nuevas ramas, actualizaremos la rama actual usando la bandera `-a`:
 
-`~$ git add.` \
-`~$ git commit -ammend` \
+`~$ git add .` \
+`~$ git commit -a` \
 `~$ git push origin head`
 
-The branch naming convention is:
+Las convenciones para las iniciales de las ramas son:
 
-- `f` for `features`
-- `bf` for `big fixes`
+- `f` para cuando se agregan características (f = features)
+- `bf` para cuando se arreglan bugs (bf = bug fixes)
 
 ## Changes
 
-On every update the developer must add the changes to the `changelog` so we have a proper wiki. All algorithms that are used for calculating things must be documented.
+En cada actualización, el desarrollador debe agregar los cambios a `changelog.md` para que tengamos un wiki adecuado. Todos los algoritmos que se utilizan para calcular cosas deben estar documentados.
