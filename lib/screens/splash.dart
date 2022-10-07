@@ -1,6 +1,6 @@
   import 'package:flutter/material.dart';
 
-MyApp(){
+class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +24,7 @@ MyApp(){
       child: Stack(
       children: <Widget>[
         Center(
-          child: Image.asset("../assets/images/Logo.png",
+          child: Image.asset("assets/images/Logo.png",
           height: 150,
           
       ),
