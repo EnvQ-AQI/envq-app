@@ -75,7 +75,7 @@ class EstadisticasScreen extends StatelessWidget {
                             height: tam.height * 0.12,
                             width: tam.width * 0.17,
                             child: const Image(
-                              image: AssetImage("assets/Viento.png"),
+                              image: AssetImage("assets/Viento.jpg"),
                               fit: BoxFit.fill,
                             ))
                       ],
