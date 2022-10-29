@@ -12,7 +12,7 @@ class EstadisticasScreen extends StatelessWidget {
       "PM 10",
       "Ozono (03)",
       "Temperatura",
-      "Presion",
+      "Presión",
       "Humedad",
       "Vientos"
     ];
@@ -89,14 +89,14 @@ class EstadisticasScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Puedes Salir a caminar",
+                    "Puedes salir a caminar",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: tam.height * 0.020,
                     ),
                   ),
                   Text(
-                    "Tempetartura 27°C",
+                    "Temperatura: 27°C",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: tam.height * 0.020,
