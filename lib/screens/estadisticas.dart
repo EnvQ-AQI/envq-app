@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class EstadisticasScreen extends StatelessWidget {
@@ -7,6 +5,7 @@ class EstadisticasScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     List<String> info = [
       "PM 2.5",
       "PM 10",

@@ -1,14 +1,13 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'estadisticas.dart';
 
 class SplashScreen extends StatefulWidget{
-  SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override 
+  // ignore: library_private_types_in_public_api
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -17,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     
     super.initState();
-    Timer(Duration(seconds:3), ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>EstadisticasScreen())));
+    Timer(const Duration(seconds:3), ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const EstadisticasScreen())));
   }
   @override
   Widget build (BuildContext context){
