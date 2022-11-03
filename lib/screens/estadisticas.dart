@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class EstadisticasScreen extends StatelessWidget {
+
   const EstadisticasScreen({Key? key}) : super(key: key);
 
   @override
+  
   Widget build(BuildContext context) {
     List<String> info = [
       "PM 2.5",
@@ -41,12 +43,23 @@ class EstadisticasScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.white),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: (){
+                            showDatePicker(
+                              context:context,
+                              
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(2001),
+                              
+                              lastDate: DateTime(2222)
+
+                            );
+                          },
                           icon: Icon(
                             Icons.calendar_month_rounded,
                             color: Colors.white,
                             size: tam.height * 0.055,
                           ))
+                          
                     ],
                   ),
                   SizedBox(
@@ -133,6 +146,8 @@ class EstadisticasScreen extends StatelessWidget {
             )
         ],
       )),
+      
     );
+    
   }
 }
