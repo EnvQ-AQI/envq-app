@@ -1,12 +1,18 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 
 class EstadisticasScreen extends StatelessWidget {
   const EstadisticasScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([ 
+      DeviceOrientation.portraitUp, 
+      DeviceOrientation.portraitDown, 
+      ]);
     List<String> info = [
       "PM 2.5",
       "PM 10",
