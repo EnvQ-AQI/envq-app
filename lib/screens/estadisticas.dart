@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +11,7 @@ class EstadisticasScreen extends StatelessWidget {
       DeviceOrientation.portraitUp, 
       DeviceOrientation.portraitDown, 
       ]);
+      
     List<String> info = [
       "PM 2.5",
       "PM 10",
