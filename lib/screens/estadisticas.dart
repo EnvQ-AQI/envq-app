@@ -1,12 +1,13 @@
-import 'dart:ui';
-
+import 'package:bases_flutter/provider/est.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EstadisticasScreen extends StatelessWidget {
   const EstadisticasScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    int rango = 99;
     List<String> info = [
       "PM 2.5",
       "PM 10",
@@ -17,6 +18,10 @@ class EstadisticasScreen extends StatelessWidget {
       "Vientos"
     ];
     final tam = MediaQuery.of(context).size;
+
+    final c = Provider.of<Est>(context, listen: false);
+
+    c.tipoColor(rango);
     return SafeArea(
       child: Scaffold(
           body: Column(
@@ -25,9 +30,11 @@ class EstadisticasScreen extends StatelessWidget {
               padding: EdgeInsets.only(top: tam.height * 0.015),
               width: double.infinity,
               height: tam.height * 0.45,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [Color(0xFF12B04e), Color(0xFFCBE145)],
+                      colors: c.color == null
+                          ? <Color>[Color(0xFF12B04e), Color(0xFFCBE145)]
+                          : c.color,
                       begin: Alignment.topRight,
                       end: Alignment.bottomRight)),
               child: Column(
@@ -62,7 +69,7 @@ class EstadisticasScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          "25",
+                          "99",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: tam.height * 0.15,
@@ -82,14 +89,14 @@ class EstadisticasScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Bueno",
+                    "Moderado",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: tam.height * 0.04,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Puedes Salir a caminar",
+                    "Puedes salir con precaución",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: tam.height * 0.020,
