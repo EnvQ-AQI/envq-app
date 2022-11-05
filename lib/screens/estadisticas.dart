@@ -18,6 +18,7 @@ class EstadisticasScreen extends StatelessWidget {
       "Humedad",
       "Vientos"
     ];
+    
     final tam = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
