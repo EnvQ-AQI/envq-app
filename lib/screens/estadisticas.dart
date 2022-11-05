@@ -1,6 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 
 class EstadisticasScreen extends StatelessWidget {
 
@@ -9,12 +9,17 @@ class EstadisticasScreen extends StatelessWidget {
   @override
   
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([ 
+      DeviceOrientation.portraitUp, 
+      DeviceOrientation.portraitDown, 
+      ]);
+      
     List<String> info = [
       "PM 2.5",
       "PM 10",
       "Ozono (03)",
       "Temperatura",
-      "Presion",
+      "Presión",
       "Humedad",
       "Vientos"
     ];
@@ -103,14 +108,14 @@ class EstadisticasScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Puedes Salir a caminar",
+                    "Puedes salir a caminar",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: tam.height * 0.020,
                     ),
                   ),
                   Text(
-                    "Tempetartura 27°C",
+                    "Temperatura: 27°C",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: tam.height * 0.020,
