@@ -1,5 +1,6 @@
 import 'package:bases_flutter/provider/est.dart';
 import 'package:bases_flutter/screens/estadisticas.dart';
+import 'package:bases_flutter/screens/graficas.dart';
 import 'package:bases_flutter/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +30,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
-        home: EstadisticasScreen());
+        home: Graficas());
   }
 }
