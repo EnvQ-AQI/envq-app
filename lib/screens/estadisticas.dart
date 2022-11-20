@@ -119,13 +119,15 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime(2001),
-                                lastDate: DateTime(2222));
+                                lastDate: DateTime(2222)
+                            );
                           },
                           icon: Icon(
                             Icons.calendar_month_rounded,
                             color: Colors.white,
                             size: tam.height * 0.055,
                           ))
+                          
                     ],
                   ),
                   SizedBox(
@@ -236,6 +238,8 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
             
         ],
       )),
+      
     );
+    
   }
 }
