@@ -1,11 +1,13 @@
 import 'dart:ui';
-
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:bases_flutter/provider/est.dart';
 
 Future<Weather> fetchWeather() async {
   final response = await http.get(Uri.parse(
@@ -74,6 +76,8 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
   }
 
   Widget build(BuildContext context) {
+    int rango = 99;
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -90,6 +94,10 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
     ];
 
     final tam = MediaQuery.of(context).size;
+
+    final c = Provider.of<Est>(context, listen: false);
+
+    c.tipoColor(rango);
     return SafeArea(
       child: Scaffold(
           body: Column(
@@ -98,9 +106,11 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
               padding: EdgeInsets.only(top: tam.height * 0.015),
               width: double.infinity,
               height: tam.height * 0.45,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [Color(0xFF12B04e), Color(0xFFCBE145)],
+                      colors: c.color == null
+                          ? <Color>[Color(0xFF12B04e), Color(0xFFCBE145)]
+                          : c.color,
                       begin: Alignment.topRight,
                       end: Alignment.bottomRight)),
               child: Column(
@@ -143,7 +153,7 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                     child: Row(
                       children: [
                         Text(
-                          "25",
+                          "99",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: tam.height * 0.15,
@@ -163,14 +173,14 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                     ),
                   ),
                   Text(
-                    "Bueno",
+                    "Moderado",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: tam.height * 0.04,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Puedes salir a caminar",
+                    "Puedes salir con precaución",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: tam.height * 0.020,
