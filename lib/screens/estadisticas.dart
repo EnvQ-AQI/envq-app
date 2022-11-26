@@ -24,6 +24,7 @@ class EstadisticasScreen extends StatelessWidget {
     c.tipoColor(rango);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text("ENVQ",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),centerTitle: true,flexibleSpace: Container(decoration: BoxDecoration(gradient: LinearGradient(colors: [Color(0xFFBCB616), Color(0xFFFEC56B)])),)),
           body: Column(
         children: [
           Container(
