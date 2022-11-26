@@ -43,9 +43,9 @@ class EstadisticasScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text(
+                      Text(
                         "El Mante, Tamaulipas, México",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontSize: tam.width*0.0335),
                       ),
                       IconButton(
                           onPressed: () {},
@@ -118,24 +118,28 @@ class EstadisticasScreen extends StatelessWidget {
             height: tam.height * 0.040,
           ),
           for (int i = 0; i < 7; i++)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: tam.width * 0.080),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(info[i],
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const Text("25",
-                          style: TextStyle(fontWeight: FontWeight.bold))
-                    ],
-                  ),
-                  Divider(
-                    height: tam.height * 0.030,
-                    color: Colors.black,
-                  )
-                ],
+            GestureDetector(onTap: () {
+              Navigator.pushNamed(context, "Graficas");
+            },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: tam.width * 0.080),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(info[i],
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: tam.width*0.035)),
+                       Text("25",
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: tam.width*0.035))
+                      ],
+                    ),
+                    Divider(
+                      height: tam.height * 0.030,
+                      color: Colors.black,
+                    )
+                  ],
+                ),
               ),
             )
         ],

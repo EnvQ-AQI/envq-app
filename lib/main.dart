@@ -28,8 +28,10 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     return MaterialApp(
+        initialRoute: "Home",
+        routes: {"Home":(context) => EstadisticasScreen(),"Graficas":(context) => Graficas()},
         debugShowCheckedModeBanner: false,
         title: 'Material App',
-        home: Graficas());
+        );
   }
 }
