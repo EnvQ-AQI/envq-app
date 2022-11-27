@@ -94,6 +94,14 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
       "Vientos"
     ];
 
+    List<String> infodd = [
+      "Temperatura",
+      "Humedad",
+      "Direccion del viento",
+      "Velocidad del viento",
+      "Presion"
+    ];
+
     final tam = MediaQuery.of(context).size;
 
     final c = Provider.of<Est>(context, listen: false);
@@ -130,15 +138,13 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime(2001),
-                                lastDate: DateTime(2222)
-                            );
+                                lastDate: DateTime(2222));
                           },
                           icon: Icon(
                             Icons.calendar_month_rounded,
                             color: Colors.white,
                             size: tam.height * 0.055,
                           ))
-                          
                     ],
                   ),
                   SizedBox(
@@ -210,31 +216,35 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Text(infodd[i],
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
                       FutureBuilder<Weather>(
                           future: currentWeather,
                           builder: (context, snapshot) {
-                            if(snapshot.data!=null){ 
-                               List<String> infodd = [
-                              "temperature                                                           "+(snapshot.data!.temperatureValue.toString()+" "+(snapshot.data!.temperatureUnit)),
-                              
-                              "humidity                                                                     "+(snapshot.data!.humidity.toString())+" %",
-                             "windDirection                                                              "+ (snapshot.data!.windDirection.toString()),
-                               "windSpeed                                                     "+ (snapshot.data!.windSpeedValue.toString())+" "+  (snapshot.data!.windSpeedUnit),
-                               
-                                "pressure                                                       "+(snapshot.data!.pressureValue.toString())+" "+(snapshot.data!.pressureUnit.toString()),
-                                  
-                            ];
+                            if (snapshot.data != null) {
+                              List<String> inforvalues = [
+                                "${snapshot.data!.temperatureValue}°${snapshot.data!.temperatureUnit}",
+                                "${snapshot.data!.humidity} %",
+                                "${snapshot.data!.windDirection}°",
+                                "${snapshot.data!.windSpeedValue} ${snapshot.data!.windSpeedUnit}",
+                                "${snapshot.data!.pressureValue} ${snapshot.data!.pressureUnit}",
+                              ];
 
-                            if (snapshot.hasData) {
-                              print(infodd[i]);
-                              return Text(infodd[i],
-                          style: TextStyle(fontWeight: FontWeight.bold));
-                            } else if (snapshot.hasError) {
-                              return Text('${snapshot.error}');
+                              if (snapshot.hasData) {
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(inforvalues[i],
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold))
+                                  ],
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text('${snapshot.error}');
+                              }
                             }
 
-                            }
-                            
                             return const Text('--');
                           })
                     ],
@@ -246,11 +256,8 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                 ],
               ),
             )
-            
         ],
       )),
-      
     );
-    
   }
 }
