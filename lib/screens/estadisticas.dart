@@ -109,6 +109,7 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
     c.tipoColor(rango);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text("ENVQ",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),centerTitle: true,flexibleSpace: Container(decoration: BoxDecoration(gradient: LinearGradient(colors: [Color(0xFFBCB616), Color(0xFFFEC56B)])),)),
           body: Column(
         children: [
           Container(
@@ -128,9 +129,9 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text(
+                      Text(
                         "El Mante, Tamaulipas, México",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontSize: tam.width*0.0335),
                       ),
                       IconButton(
                           onPressed: () {
@@ -209,6 +210,9 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
             height: tam.height * 0.040,
           ),
           for (int i = 0; i < 5; i++)
+            GestureDetector(onTap: () {
+              Navigator.pushNamed(context, "Graficas");
+            },
             Padding(
               padding: EdgeInsets.symmetric(horizontal: tam.width * 0.080),
               child: Column(

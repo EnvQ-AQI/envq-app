@@ -32,7 +32,10 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     return MaterialApp(
-
+        initialRoute: "Home",
+        routes: {"Home":(context) => EstadisticasScreen(),"Graficas":(context) => Graficas()},
+        debugShowCheckedModeBanner: false,
+        title: 'Material App',
       theme: ThemeData(
         colorScheme: const ColorScheme(
           primary: Color.fromARGB(255, 18, 176, 78), 
@@ -49,7 +52,6 @@ class MyApp extends StatelessWidget {
         )
       ),
         debugShowCheckedModeBanner: false,
-        title: 'Material App',
         home: SplashScreen());
   }
 }
