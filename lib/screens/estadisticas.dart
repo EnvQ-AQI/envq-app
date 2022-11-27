@@ -75,6 +75,7 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
     currentWeather = fetchWeather();
   }
 
+  @override
   Widget build(BuildContext context) {
     int rango = 99;
 
