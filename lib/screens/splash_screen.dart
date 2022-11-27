@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'estadisticas.dart';
@@ -18,7 +19,12 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => EstadisticasScreen())));
-    Timer(const Duration(seconds:3), ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const EstadisticasScreen())));
+    Timer(
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const EstadisticasScreen())));
   }
 
   @override

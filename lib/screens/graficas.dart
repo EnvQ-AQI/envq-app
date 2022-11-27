@@ -5,6 +5,7 @@ class Graficas extends StatelessWidget {
   final datos = ["200", "150", "100", "50", "0"];
 
   Graficas({super.key});
+
   @override
   Widget build(BuildContext context) {
     final tam = MediaQuery.of(context).size;
@@ -16,9 +17,10 @@ class Graficas extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              width: tam.width*0.9,
-              height: tam.height*0.2825,
-              margin: EdgeInsets.only(top: tam.height * 0.14,left: tam.width*0.05),
+              width: tam.width * 0.9,
+              height: tam.height * 0.2825,
+              margin: EdgeInsets.only(
+                  top: tam.height * 0.14, left: tam.width * 0.05),
               color: Colors.white,
               child: AspectRatio(
                 aspectRatio: 16 / 9,
@@ -56,40 +58,44 @@ class Graficas extends StatelessWidget {
             ),
             Container(
               color: Colors.white,
-              width: tam.width*0.9,
-              height: tam.height*0.285,
-              margin: EdgeInsets.only(top: tam.height * 0.5,left: tam.width*0.05),
+              width: tam.width * 0.9,
+              height: tam.height * 0.285,
+              margin: EdgeInsets.only(
+                  top: tam.height * 0.5, left: tam.width * 0.05),
               child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: DChartLine(
-                data: const [
-                  {
-                    'id': 'Line',
-                    'data': [
-                      {'domain': 0, 'measure': 11},
-                      {'domain': 1, 'measure': 8},
-                      {'domain': 2, 'measure': 33},
-                      {'domain': 3, 'measure': 75},
-                      {'domain': 4, 'measure': 79},
-                      {'domain': 5, 'measure': 23},
-                      {'domain': 6, 'measure': 8},
-                      {'domain': 7, 'measure': 72},
-                      {'domain': 8, 'measure': 65},
-                      {'domain': 9, 'measure': 60},
-                      {'domain': 10, 'measure': 52},
-                      {'domain': 11, 'measure': 61},
-                      {'domain': 12, 'measure': 64},
-                      {'domain': 13, 'measure': 23},
-                    ],
-                  },
-                ],
-                includePoints: true,
-                lineColor: (lineData, index, id) => Colors.green,
-              ),
+                aspectRatio: 16 / 9,
+                child: DChartLine(
+                  data: const [
+                    {
+                      'id': 'Line',
+                      'data': [
+                        {'domain': 0, 'measure': 11},
+                        {'domain': 1, 'measure': 8},
+                        {'domain': 2, 'measure': 33},
+                        {'domain': 3, 'measure': 75},
+                        {'domain': 4, 'measure': 79},
+                        {'domain': 5, 'measure': 23},
+                        {'domain': 6, 'measure': 8},
+                        {'domain': 7, 'measure': 72},
+                        {'domain': 8, 'measure': 65},
+                        {'domain': 9, 'measure': 60},
+                        {'domain': 10, 'measure': 52},
+                        {'domain': 11, 'measure': 61},
+                        {'domain': 12, 'measure': 64},
+                        {'domain': 13, 'measure': 23},
+                      ],
+                    },
+                  ],
+                  includePoints: true,
+                  lineColor: (lineData, index, id) => Colors.green,
                 ),
+              ),
             ),
             Container(
-              margin: EdgeInsets.only(top: tam.height * 0.393, left: tam.width * 0.11,),
+              margin: EdgeInsets.only(
+                top: tam.height * 0.393,
+                left: tam.width * 0.11,
+              ),
               color: Colors.white,
               width: tam.width * 0.88,
               height: tam.height * 0.035,

@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:bases_flutter/provider/est.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 Future<Weather> fetchWeather() async {
   final response = await http.get(Uri.parse(
