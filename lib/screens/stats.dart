@@ -117,13 +117,6 @@ class StatsScreenState extends State<StatsScreen> {
                         SizedBox(
                           width: tam.height * 0.01,
                         ),
-                        SizedBox(
-                            height: tam.height * 0.12,
-                            width: tam.width * 0.17,
-                            child: const Image(
-                              image: AssetImage("assets/Viento.jpg"),
-                              fit: BoxFit.fill,
-                            ))
                       ],
                     ),
                   ),
@@ -136,13 +129,6 @@ class StatsScreenState extends State<StatsScreen> {
                   ),
                   Text(
                     c.message,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: tam.height * 0.020,
-                    ),
-                  ),
-                  Text(
-                    "Temperatura: 27°C",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: tam.height * 0.020,
