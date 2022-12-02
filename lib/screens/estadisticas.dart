@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 Future<Weather> fetchWeather() async {
   final response = await http.get(Uri.parse(
-      'http://dataservice.accuweather.com/currentconditions/v1/1065388?apikey=It2W4ACYxmplHBtjTIziBqOo3iejEWTO&language=es-mx&details=true'));
+      'https://api.waqi.info/feed/here/?token=21a85442ff13ef918f154d4ce58eb70c288336eb'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -81,7 +81,7 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
+/*
     List<String> info = [
       "PM 2.5",
       "PM 10",
@@ -91,6 +91,7 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
       "Humedad",
       "Vientos"
     ];
+ */
 
     List<String> infodd = [
       "Temperatura",
@@ -107,176 +108,164 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
     c.tipoColor(rango);
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-              title: Text(
-                "ENVQ",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              centerTitle: true,
-              flexibleSpace: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [Color(0xFFBCB616), Color(0xFFFEC56B)])),
-              )),
           body: Column(
-            children: [
-              Container(
-                  padding: EdgeInsets.only(top: tam.height * 0.015),
-                  width: double.infinity,
-                  height: tam.height * 0.45,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: c.color == null
-                              ? <Color>[Color(0xFF12B04e), Color(0xFFCBE145)]
-                              : c.color,
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomRight)),
+        children: [
+          Container(
+              padding: EdgeInsets.only(top: tam.height * 0.015),
+              width: double.infinity,
+              height: tam.height * 0.45,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: c.color ??
+                          <Color>[
+                            const Color(0xFF12B04e),
+                            const Color(0xFFCBE145)
+                          ],
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomRight)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "El Mante, Tamaulipas, México",
+                        style: TextStyle(
+                            color: Colors.white, fontSize: tam.width * 0.0335),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2001),
+                                lastDate: DateTime(2222));
+                          },
+                          icon: Icon(
+                            Icons.calendar_month_rounded,
+                            color: Colors.white,
+                            size: tam.height * 0.055,
+                          ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: tam.height * 0.018,
+                  ),
+                  Text("10 de septiembre de 2022",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: tam.height * 0.020,
+                      )),
+                  Padding(
+                    padding: EdgeInsets.only(left: tam.width * 0.31),
+                    child: Row(
+                      children: [
+                        Text(
+                          "99",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: tam.height * 0.15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: tam.height * 0.01,
+                        ),
+                        SizedBox(
+                            height: tam.height * 0.12,
+                            width: tam.width * 0.17,
+                            child: const Image(
+                              image: AssetImage("assets/Viento.jpg"),
+                              fit: BoxFit.fill,
+                            ))
+                      ],
+                    ),
+                  ),
+                  Text(
+                    "Moderado",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: tam.height * 0.04,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Puedes salir con precaución",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: tam.height * 0.020,
+                    ),
+                  ),
+                  Text(
+                    "Temperatura: 27°C",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: tam.height * 0.020,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tam.height * 0.020,
+                  ),
+                ],
+              )),
+          SizedBox(
+            height: tam.height * 0.040,
+          ),
+          for (int i = 0; i < 5; i++)
+            GestureDetector(
+                onTap: () {
+                  rango = 51;
+                  Navigator.pushNamed(context, "Graficas");
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: tam.width * 0.080),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "El Mante, Tamaulipas, México",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: tam.width * 0.0335),
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(2001),
-                                    lastDate: DateTime(2222));
-                              },
-                              icon: Icon(
-                                Icons.calendar_month_rounded,
-                                color: Colors.white,
-                                size: tam.height * 0.055,
-                              ))
+                          Text(infodd[i],
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          FutureBuilder<Weather>(
+                              future: currentWeather,
+                              builder: (context, snapshot) {
+                                if (snapshot.data != null) {
+                                  List<String> inforvalues = [
+                                    "${snapshot.data!.temperatureValue}°${snapshot.data!.temperatureUnit}",
+                                    "${snapshot.data!.humidity} %",
+                                    "${snapshot.data!.windDirection}°",
+                                    "${snapshot.data!.windSpeedValue} ${snapshot.data!.windSpeedUnit}",
+                                    "${snapshot.data!.pressureValue} ${snapshot.data!.pressureUnit}",
+                                  ];
+
+                                  if (snapshot.hasData) {
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(inforvalues[i],
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold))
+                                      ],
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return Text('${snapshot.error}');
+                                  }
+                                }
+
+                                return const Text('--');
+                              })
                         ],
                       ),
-                      SizedBox(
-                        height: tam.height * 0.018,
-                      ),
-                      Text("10 de septiembre de 2022",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: tam.height * 0.020,
-                          )),
-                      Padding(
-                        padding: EdgeInsets.only(left: tam.width * 0.31),
-                        child: Row(
-                          children: [
-                            Text(
-                              "99",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: tam.height * 0.15,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: tam.height * 0.01,
-                            ),
-                            SizedBox(
-                                height: tam.height * 0.12,
-                                width: tam.width * 0.17,
-                                child: const Image(
-                                  image: AssetImage("assets/Viento.jpg"),
-                                  fit: BoxFit.fill,
-                                ))
-                          ],
-                        ),
-                      ),
-                      Text(
-                        "Moderado",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: tam.height * 0.04,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Puedes salir con precaución",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: tam.height * 0.020,
-                        ),
-                      ),
-                      Text(
-                        "Temperatura: 27°C",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: tam.height * 0.020,
-                        ),
-                      ),
-                      SizedBox(
-                        height: tam.height * 0.020,
-                      ),
+                      Divider(
+                        height: tam.height * 0.030,
+                        color: Colors.black,
+                      )
                     ],
-                  )),
-              SizedBox(
-                height: tam.height * 0.040,
-              ),
-              for (int i = 0; i < 5; i++)
-                GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, "Graficas");
-                    },
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: tam.width * 0.080),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(infodd[i],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              FutureBuilder<Weather>(
-                                  future: currentWeather,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.data != null) {
-                                      List<String> inforvalues = [
-                                        "${snapshot.data!.temperatureValue}°${snapshot.data!.temperatureUnit}",
-                                        "${snapshot.data!.humidity} %",
-                                        "${snapshot.data!.windDirection}°",
-                                        "${snapshot.data!.windSpeedValue} ${snapshot.data!.windSpeedUnit}",
-                                        "${snapshot.data!.pressureValue} ${snapshot.data!.pressureUnit}",
-                                      ];
-
-                                      if (snapshot.hasData) {
-                                        return Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(inforvalues[i],
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold))
-                                          ],
-                                        );
-                                      } else if (snapshot.hasError) {
-                                        return Text('${snapshot.error}');
-                                      }
-                                    }
-
-                                    return const Text('--');
-                                  })
-                            ],
-                          ),
-                          Divider(
-                            height: tam.height * 0.030,
-                            color: Colors.black,
-                          )
-                        ],
-                      ),
-                    ))
-            ],
-          )),
+                  ),
+                ))
+        ],
+      )),
     );
   }
 }
