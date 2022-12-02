@@ -98,7 +98,8 @@ class StatsScreenState extends State<StatsScreen> {
                     padding: EdgeInsets.only(left: tam.width * 0.31),
                     child: Row(
                       children: [
-                        Consumer<WeatherProvider>(builder: (context, value, child) {
+                        Consumer<WeatherProvider>(
+                            builder: (context, value, child) {
                           if (value.isLoading) {
                             return const Center(
                               child: CircularProgressIndicator(),
@@ -107,7 +108,8 @@ class StatsScreenState extends State<StatsScreen> {
                           final data = value.weather;
                           rango = int.parse(data[7]);
                           c.tipoColor(rango);
-                          return Text(data[7],
+                          return Text(
+                            data[7],
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: tam.height * 0.15,

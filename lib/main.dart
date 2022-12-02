@@ -1,8 +1,8 @@
 import 'package:bases_flutter/provider/color_provider.dart';
 import 'package:bases_flutter/provider/weather_provider.dart';
-import 'package:bases_flutter/screens/stats.dart';
 import 'package:bases_flutter/screens/graphics.dart';
 import 'package:bases_flutter/screens/splash.dart';
+import 'package:bases_flutter/screens/stats.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

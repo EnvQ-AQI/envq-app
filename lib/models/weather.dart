@@ -1,12 +1,12 @@
 class Weather {
-  final int    pm25;
-  final int    pm10;
+  final double pm25;
+  final double pm10;
   final double ozone;
-  final int    temperature;
-  final double pressure;
-  final int    humidity;
-  final int    wind;
-  final int    aqi;
+  final int temperature;
+  final int pressure;
+  final int humidity;
+  final double wind;
+  final int aqi;
 
   const Weather({
     required this.pm25,
@@ -19,16 +19,16 @@ class Weather {
     required this.aqi,
   });
 
-  factory Weather.fromJson(Map<String, dynamic> json) {
+  factory Weather.fromJson(Map<String, dynamic> openw, Map<String, dynamic> aqair) {
     return Weather(
-      pm25:         json['data']['iaqi']['pm25']['v'],
-      pm10:         json['data']['iaqi']['pm10']['v'],
-      ozone:        json['data']['iaqi']['o3']['v'],
-      temperature:  json['data']['iaqi']['t']['v'],
-      pressure:     json['data']['iaqi']['p']['v'],
-      humidity:     json['data']['iaqi']['h']['v'],
-      wind:         json['data']['iaqi']['w']['v'],
-      aqi:         json['data']['aqi'],
+      pm25: openw['list'][0]['components']['pm2_5'],
+      pm10: openw ['list'][0]['components']['pm10'],
+      ozone: openw['list'][0]['components']['o3'],
+      temperature: aqair['data']['current']['weather']['tp'],
+      pressure: aqair['data']['current']['weather']['pr'],
+      humidity: aqair['data']['current']['weather']['hu'],
+      wind: aqair['data']['current']['weather']['ws'],
+      aqi: aqair['data']['current']['pollution']['aqius'],
     );
   }
 }
