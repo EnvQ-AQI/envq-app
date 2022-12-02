@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'estadisticas.dart';
+import 'stats.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
@@ -18,13 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => EstadisticasScreen())));
+            MaterialPageRoute(builder: (context) => StatsScreen())));
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const EstadisticasScreen())));
+                builder: (context) => const StatsScreen())));
   }
 
   @override

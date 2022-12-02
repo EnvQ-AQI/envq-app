@@ -1,76 +1,23 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:bases_flutter/models/est.dart';
+import 'package:bases_flutter/provider/color_provider.dart';
+import 'package:bases_flutter/provider/weather_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-Future<Weather> fetchWeather() async {
-  final response = await http.get(Uri.parse(
-      'https://api.waqi.info/feed/here/?token=21a85442ff13ef918f154d4ce58eb70c288336eb'));
-
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Weather.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load album');
-  }
-}
-
-class EstadisticasScreen extends StatefulWidget {
-  const EstadisticasScreen({Key? key}) : super(key: key);
+class StatsScreen extends StatefulWidget {
+  const StatsScreen({Key? key}) : super(key: key);
 
   @override
-  State<EstadisticasScreen> createState() => EstadisticasScreenState();
+  State<StatsScreen> createState() => StatsScreenState();
 }
 
-class Weather {
-  final double temperatureValue;
-  final String temperatureUnit;
-  final int humidity;
-  final int windDirection;
-  final double windSpeedValue;
-  final String windSpeedUnit;
-  final double pressureValue;
-  final String pressureUnit;
-
-  const Weather({
-    required this.temperatureValue,
-    required this.temperatureUnit,
-    required this.humidity,
-    required this.windDirection,
-    required this.windSpeedValue,
-    required this.windSpeedUnit,
-    required this.pressureValue,
-    required this.pressureUnit,
-  });
-
-  factory Weather.fromJson(List<dynamic> json) {
-    return Weather(
-      temperatureValue: json[0]['Temperature']['Metric']['Value'],
-      temperatureUnit: json[0]['Temperature']['Metric']['Unit'],
-      humidity: json[0]['RelativeHumidity'],
-      windDirection: json[0]['Wind']['Direction']['Degrees'],
-      windSpeedValue: json[0]['Wind']['Speed']['Metric']['Value'],
-      windSpeedUnit: json[0]['Wind']['Speed']['Metric']['Unit'],
-      pressureValue: json[0]['Pressure']['Metric']['Value'],
-      pressureUnit: json[0]['Pressure']['Metric']['Unit'],
-    );
-  }
-}
-
-class EstadisticasScreenState extends State<EstadisticasScreen> {
-  late Future<Weather> currentWeather;
-
+class StatsScreenState extends State<StatsScreen> {
   @override
   void initState() {
     super.initState();
-    currentWeather = fetchWeather();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<WeatherProvider>(context, listen: false).getAllTodos();
+    });
   }
 
   @override
@@ -81,7 +28,7 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-/*
+
     List<String> info = [
       "PM 2.5",
       "PM 10",
@@ -91,21 +38,11 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
       "Humedad",
       "Vientos"
     ];
- */
-
-    List<String> infodd = [
-      "Temperatura",
-      "Humedad",
-      "Direccion del viento",
-      "Velocidad del viento",
-      "Presion"
-    ];
 
     final tam = MediaQuery.of(context).size;
 
-    final c = Provider.of<Est>(context, listen: false);
+    final c = Provider.of<ColorModel>(context, listen: false);
 
-    c.tipoColor(rango);
     return SafeArea(
       child: Scaffold(
           body: Column(
@@ -161,13 +98,22 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                     padding: EdgeInsets.only(left: tam.width * 0.31),
                     child: Row(
                       children: [
-                        Text(
-                          "99",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: tam.height * 0.15,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        Consumer<WeatherProvider>(builder: (context, value, child) {
+                          if (value.isLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          final data = value.weather;
+                          rango = int.parse(data[7]);
+                          c.tipoColor(rango);
+                          return Text(data[7],
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: tam.height * 0.15,
+                                fontWeight: FontWeight.bold),
+                          );
+                        }),
                         SizedBox(
                           width: tam.height * 0.01,
                         ),
@@ -182,14 +128,14 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                     ),
                   ),
                   Text(
-                    "Moderado",
+                    c.currentState,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: tam.height * 0.04,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Puedes salir con precaución",
+                    c.message,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: tam.height * 0.020,
@@ -210,7 +156,7 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
           SizedBox(
             height: tam.height * 0.040,
           ),
-          for (int i = 0; i < 5; i++)
+          for (int i = 0; i < 7; i++)
             GestureDetector(
                 onTap: () {
                   rango = 51;
@@ -223,38 +169,22 @@ class EstadisticasScreenState extends State<EstadisticasScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(infodd[i],
+                          Text(info[i],
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
-                          FutureBuilder<Weather>(
-                              future: currentWeather,
-                              builder: (context, snapshot) {
-                                if (snapshot.data != null) {
-                                  List<String> inforvalues = [
-                                    "${snapshot.data!.temperatureValue}°${snapshot.data!.temperatureUnit}",
-                                    "${snapshot.data!.humidity} %",
-                                    "${snapshot.data!.windDirection}°",
-                                    "${snapshot.data!.windSpeedValue} ${snapshot.data!.windSpeedUnit}",
-                                    "${snapshot.data!.pressureValue} ${snapshot.data!.pressureUnit}",
-                                  ];
-
-                                  if (snapshot.hasData) {
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(inforvalues[i],
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold))
-                                      ],
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return Text('${snapshot.error}');
-                                  }
-                                }
-
-                                return const Text('--');
-                              })
+                          Consumer<WeatherProvider>(
+                            builder: (context, value, child) {
+                              if (value.isLoading) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              final data = value.weather;
+                              return Text(data[i],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold));
+                            },
+                          ),
                         ],
                       ),
                       Divider(
