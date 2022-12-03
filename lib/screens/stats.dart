@@ -39,6 +39,12 @@ class StatsScreenState extends State<StatsScreen> {
       "Vientos"
     ];
 
+    var MONTHS = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+
+    String formattedDateTime() {
+    DateTime now = new DateTime.now();
+    return now.day.toString()+" de "+MONTHS[now.month-1]+" de "+now.year.toString();
+    }
     final tam = MediaQuery.of(context).size;
 
     final c = Provider.of<ColorModel>(context, listen: false);
@@ -89,7 +95,9 @@ class StatsScreenState extends State<StatsScreen> {
                   SizedBox(
                     height: tam.height * 0.018,
                   ),
-                  Text("10 de septiembre de 2022",
+
+                
+                  Text(formattedDateTime(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: tam.height * 0.020,
