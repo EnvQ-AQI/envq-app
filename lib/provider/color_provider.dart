@@ -6,7 +6,7 @@ class ColorModel extends ChangeNotifier {
     const Color(0xFFCBE145)
   ];
   String _currentState = 'Moderado';
-  String _message = 'Puedes salir con precaucion';
+  String _message = 'Puedes salir con precaución';
 
   get color {
     return _lista;
@@ -44,12 +44,12 @@ class ColorModel extends ChangeNotifier {
     _message = rango > 0 && rango < 75
         ? 'Puedes salir a caminar'
         : rango > 74 && rango < 100
-            ? 'Puedes salir con precaucion'
+            ? 'Puedes salir con precaución'
             : rango > 99 && rango < 150
                 ? 'No es recomendable salir'
                 : rango > 149 && rango < 180
                     ? 'Es peligroso salir'
-                    : 'Quedate en casa';
+                    : 'Quédate en casa';
 
     notifyListeners();
   }
