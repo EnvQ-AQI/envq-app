@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class WeatherProvider extends ChangeNotifier {
   final _service = WeatherService();
   bool isLoading = false;
-  
+
   List<String> _weather = [];
+
   List<String> get weather => _weather;
 
   Future<void> getAllTodos() async {
