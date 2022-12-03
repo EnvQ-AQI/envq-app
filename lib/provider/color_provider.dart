@@ -11,6 +11,7 @@ class ColorModel extends ChangeNotifier {
   get color {
     return _lista;
   }
+
   get currentState {
     return _currentState;
   }
@@ -33,22 +34,22 @@ class ColorModel extends ChangeNotifier {
     _currentState = rango > 0 && rango < 75
         ? 'Bueno'
         : rango > 74 && rango < 100
-        ? 'Moderado'
-        : rango > 99 && rango < 150
-        ? 'No saludable'
-        : rango > 149 && rango < 180
-        ? 'Insalubre '
-        : 'Peligroso';
+            ? 'Moderado'
+            : rango > 99 && rango < 150
+                ? 'No saludable'
+                : rango > 149 && rango < 180
+                    ? 'Insalubre '
+                    : 'Peligroso';
 
     _message = rango > 0 && rango < 75
         ? 'Puedes salir a caminar'
         : rango > 74 && rango < 100
-        ? 'Puedes salir con precaucion'
-        : rango > 99 && rango < 150
-        ? 'No es recomendable salir'
-        : rango > 149 && rango < 180
-        ? 'Es peligroso salir'
-        : 'Quedate en casa';
+            ? 'Puedes salir con precaucion'
+            : rango > 99 && rango < 150
+                ? 'No es recomendable salir'
+                : rango > 149 && rango < 180
+                    ? 'Es peligroso salir'
+                    : 'Quedate en casa';
 
     notifyListeners();
   }

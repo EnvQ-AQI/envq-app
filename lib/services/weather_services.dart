@@ -1,16 +1,20 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
 import '../models/weather.dart';
 
 class WeatherService {
   Future<List<String>> fetchWeather() async {
-    final response = await http.get(Uri.parse(
-        'https://api.waqi.info/feed/here/?token=21a85442ff13ef918f154d4ce58eb70c288336eb'));
+    final waqiResponse = await http.get(Uri.parse(
+        'http://api.openweathermap.org/data/2.5/air_pollution?lat=22.7375602&lon=-98.9576679&appid=e55e820a08be0a0163f6ebee18f15abb'));
+    final aqairResponse = await http.get(Uri.parse(
+        'http://api.airvisual.com/v2/nearest_city?lat=22.7476528&lon=-98.9630752&key=cc504fc1-7db3-422e-90cb-a3cc4d9aaca3'));
 
-    if (response.statusCode == 200) {
+    if (waqiResponse.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      Weather weather = Weather.fromJson(jsonDecode(response.body));
+      Weather weather = Weather.fromJson(jsonDecode(waqiResponse.body), jsonDecode(aqairResponse.body));
 
       List<String> castedParametersList = <String>[];
 
