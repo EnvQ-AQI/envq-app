@@ -1,7 +1,8 @@
-import 'package:bases_flutter/provider/est.dart';
-import 'package:bases_flutter/screens/estadisticas.dart';
-import 'package:bases_flutter/screens/graficas.dart';
-import 'package:bases_flutter/screens/splash_screen.dart';
+import 'package:bases_flutter/provider/color_provider.dart';
+import 'package:bases_flutter/provider/weather_provider.dart';
+import 'package:bases_flutter/screens/stats.dart';
+import 'package:bases_flutter/screens/graphics.dart';
+import 'package:bases_flutter/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => Est()),
+        ChangeNotifierProvider(create: (_) => ColorModel()),
+        ChangeNotifierProvider(create: (_) => WeatherProvider()),
       ],
       child: MyApp(),
     );
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         initialRoute: "Home",
         routes: {
-          "Home": (context) => EstadisticasScreen(),
+          "Home": (context) => StatsScreen(),
           "Graficas": (context) => Graficas()
         },
         debugShowCheckedModeBanner: false,
