@@ -1,35 +1,53 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-class Splash extends StatelessWidget {
+import 'stats.dart';
+
+class SplashScreen extends StatefulWidget {
+  SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+        Duration(seconds: 3),
+        () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => StatsScreen())));
+    Timer(
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const StatsScreen())));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[
-                  Color(0xFF12B04E),
-                  Color(0xFF6DD5DE),
-                ],
-              ),
-            ),
-            child: Stack(children: <Widget>[
-              Center(
-                child: Image.asset(
-                  "assets/images/Logo.png",
-                  height: 150,
-                ),
-              ),
-            ]),
-          ),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            Color(0xFF12B04E),
+            Color(0xFF6DD5DE),
+          ],
         ),
       ),
+      child: Stack(children: <Widget>[
+        Center(
+          child: Image.asset(
+            "assets/images/Logo.png",
+            height: 100,
+          ),
+        ),
+      ]),
     );
   }
 }
