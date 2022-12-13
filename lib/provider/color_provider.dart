@@ -20,34 +20,34 @@ class ColorModel extends ChangeNotifier {
     return _message;
   }
 
-  tipoColor(int rango) {
-    _lista = rango > 0 && rango < 75
+  tipoColor(int range) async {
+    _lista = range > 0 && range < 51
         ? <Color>[const Color(0xFF12B04e), const Color(0xFFCBE145)]
-        : rango > 74 && rango < 100
+        : range > 50 && range < 101
             ? <Color>[const Color(0xFFBCB616), const Color(0xFFFEC56B)]
-            : rango > 99 && rango < 150
+            : range > 100 && range < 151
                 ? <Color>[const Color(0xFFA81616), const Color(0xFFD1E15C)]
-                : rango > 149 && rango < 180
+                : range > 150 && range < 201
                     ? <Color>[const Color(0xFFAA1514), const Color(0xFFFF803B)]
                     : <Color>[const Color(0xFF9D1A19), const Color(0xFF482370)];
 
-    _currentState = rango > 0 && rango < 75
+    _currentState = range > 0 && range < 51
         ? 'Bueno'
-        : rango > 74 && rango < 100
+        : range > 50 && range < 101
             ? 'Moderado'
-            : rango > 99 && rango < 150
+            : range > 100 && range < 151
                 ? 'No saludable'
-                : rango > 149 && rango < 180
+                : range > 150 && range < 201
                     ? 'Insalubre '
                     : 'Peligroso';
 
-    _message = rango > 0 && rango < 75
+    _message = range > 0 && range < 51
         ? 'Puedes salir a caminar'
-        : rango > 74 && rango < 100
+        : range > 50 && range < 101
             ? 'Puedes salir con precaución'
-            : rango > 99 && rango < 150
+            : range > 100 && range < 151
                 ? 'No es recomendable salir'
-                : rango > 149 && rango < 180
+                : range > 150 && range < 201
                     ? 'Es peligroso salir'
                     : 'Quédate en casa';
 

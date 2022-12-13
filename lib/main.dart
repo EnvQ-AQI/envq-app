@@ -1,11 +1,13 @@
 import 'package:bases_flutter/provider/color_provider.dart';
-import 'package:bases_flutter/provider/weather_provider.dart';
-import 'package:bases_flutter/screens/graphics.dart';
+import 'package:bases_flutter/provider/current_weather_provider.dart';
+import 'package:bases_flutter/provider/date_manager_provider.dart';
+import 'package:bases_flutter/provider/historical_weather_provider.dart';
 import 'package:bases_flutter/screens/splash.dart';
 import 'package:bases_flutter/screens/stats.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(const AppState());
 
@@ -17,7 +19,9 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ColorModel()),
-        ChangeNotifierProvider(create: (_) => WeatherProvider()),
+        ChangeNotifierProvider(create: (_) => DateManagerProvider()),
+        ChangeNotifierProvider(create: (_) => CurrentWeatherProvider()),
+        ChangeNotifierProvider(create: (_) => HistoricalWeatherProvider()),
       ],
       child: MyApp(),
     );
@@ -34,11 +38,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         initialRoute: "Home",
         routes: {
-          "Home": (context) => StatsScreen(),
-          "Graficas": (context) => Graficas()
+          "Home": (context) => const StatsScreen(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Material App',
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('es'),
+        ],
         theme: ThemeData(
             colorScheme: const ColorScheme(
                 primary: Color.fromARGB(255, 18, 176, 78),
